@@ -1,0 +1,14 @@
+package com.example.projectexam
+
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
+import com.example.projectexam.di.component.DaggerApplicationComponent
+import dagger.android.AndroidInjection.inject
+
+class RawGames : DaggerApplication() {
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerApplicationComponent.create().apply { inject(
+            this@RawGames) }
+    }
+}
