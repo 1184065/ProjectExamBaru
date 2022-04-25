@@ -14,5 +14,6 @@ interface HomeView {
     fun onPaginationSuccess(entity: HomeEntity)
     fun onPaginationError(error: Throwable)
     fun getApiTopRating()
+    fun getApiLatest()
     val states: LiveData<HomeViewState>
 }

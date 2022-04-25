@@ -17,6 +17,14 @@ class HomePresenter(
         )
     }
 
+    fun getApiLatest(){
+        view.onShowLoading()
+        usecase.execute(
+            GetApiLatestUsecase(),
+            HomeParam()
+        )
+    }
+
     fun loadMore(page: Long){
         usecase.execute(
             LoadMoreUsecase(),
@@ -29,6 +37,19 @@ class HomePresenter(
     }
 
     inner class GetApiTopRatingUsecase : DefaultObserver<HomeEntity>() {
+
+        override fun onSuccess(entity: HomeEntity){
+            view.onHideLoading()
+            view.onSuccess(entity)
+        }
+
+        override fun onError(exception: Throwable) {
+            view.onHideLoading()
+            view.onError(exception)
+        }
+    }
+
+    inner class GetApiLatestUsecase : DefaultObserver<HomeEntity>() {
 
         override fun onSuccess(entity: HomeEntity){
             view.onHideLoading()

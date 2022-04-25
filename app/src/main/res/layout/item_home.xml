@@ -7,24 +7,52 @@
     android:layout_margin="8dp">
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_nametop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Name"/>
+        android:layout_marginBottom="10dp"
+        tools:text="name"
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/tv_slug"
+        android:id="@+id/tv_rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:maxLines="2"
         android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name"
-        tools:text="Slug"/>
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"
+        tools:text="rating"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nametop"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/iv_background_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rating"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_namelatest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"
+        tools:text="name"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_released"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"
+        tools:text="released"
+        app:layout_constraintTop_toBottomOf="@+id/tv_namelatest"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

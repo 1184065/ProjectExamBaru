@@ -6,7 +6,10 @@ data class HomeEntity(
     val results: MutableList<Result>){
 
     data class Result(
-        val name: String,
-        val slug: String,
+        val nametop: String,
+        val rating: String,
+        val namelatest: String,
+        val released: String,
+
     )
 }

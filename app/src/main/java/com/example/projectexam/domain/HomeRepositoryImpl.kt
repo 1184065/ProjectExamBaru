@@ -16,12 +16,30 @@ class HomeRepositoryImpl(
                 totalPages = response.totalPages ?: -1L,
                 results = response.results?.map { result ->
                     Result(
-                        name = result.name ?: "Untitled",
-                        slug = result.slug ?: "No Description"
+                        nametop = result.nametop ?: " ",
+                        rating = result.rating ?: " ",
+                        namelatest = result.namelatest ?: " ",
+                        released = result.released ?: " "
                     )
                 }?.toMutableList() ?: mutableListOf()
             )
           }
+
+    override fun getApiLatest(param: HomeParam): Single<HomeEntity> =
+        factory.getApiLatest().map { response ->
+            HomeEntity(
+                page = response.page ?: -1L,
+                totalPages = response.totalPages ?: -1L,
+                results = response.results?.map { result ->
+                    Result(
+                        nametop = result.nametop ?: " ",
+                        rating = result.rating ?: " ",
+                        namelatest = result.namelatest ?: " ",
+                        released = result.released ?: " "
+                    )
+                }?.toMutableList() ?: mutableListOf()
+            )
+        }
         }
 
 //results = response.results?.map { result ->

@@ -11,7 +11,7 @@ class HomeUsecase (
     thread: UIThread
 ) : Usecase<HomeEntity, HomeParam>(executor, thread) {
 
-    override fun buildUseCaseObservable(params: HomeParam): Single<HomeEntity> =
+    override fun buildUsecaseObservable(params: HomeParam): Single<HomeEntity> =
         repository.getApiTopRating(params)
-
-}
+        repository.getApiLatest(params)
+    }

@@ -16,5 +16,12 @@ interface HomeDatasource {
 
         @Query("page")
         page: Long
-    ): Single<HomeResponse>
+    )
+
+    @GET("games?key=${API_KEY}&page_size=10&ordering=-released&platforms=4&page=1&dates=2021-12-01,2021-12-31")
+    fun getApiLatest(
+        @Query("api_key")
+        apiKey: String,
+    )
+    : Single<HomeResponse>
 }

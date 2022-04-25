@@ -14,8 +14,14 @@ data class HomeResponse(
 
 data class Result(
     @SerializedName("name")
-    val name: String? = null,
+    val nametop: String? = null,
 
-    @SerializedName("slug")
-    val slug: String? = null
+    @SerializedName("rating")
+    val rating: String? = null,
+
+    @SerializedName("name")
+    val namelatest: String? = null,
+
+    @SerializedName("rating")
+    val released: String? = null
 )

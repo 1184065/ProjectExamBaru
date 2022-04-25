@@ -3,6 +3,7 @@ package com.example.projectexam.presentation
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,8 +52,13 @@ class HomeActivity : DaggerAppCompatActivity(), HomeView {
 
     override fun onSuccess(entity: HomeEntity) {
         adapter = HomeAdapter(entity.results.toMutableList())
-        rv_home.addItemDecoration(DividerItemDecoration(this@HomeActivity, DividerItemDecoration.VERTICAL))
+        rv_home.addItemDecoration(DividerItemDecoration(
+            this@HomeActivity,
+            DividerItemDecoration.VERTICAL
+         )
+        )
         rv_home.adapter = adapter
+        rv_home.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         currentPage = entity.page
         rv_home.addOnScrollListener(object : OnScrollListener() {
@@ -90,6 +96,17 @@ class HomeActivity : DaggerAppCompatActivity(), HomeView {
         currentPage--
         hideLoading()
     }
+
+    override fun getApiTopRating() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getApiLatest() {
+        TODO("Not yet implemented")
+    }
+
+    override val states: LiveData<HomeViewState>
+        get() = TODO("Not yet implemented")
 
     private fun hideLoading(){
         adapter?.hideLoading()

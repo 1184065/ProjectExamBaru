@@ -92,8 +92,10 @@ class HomeAdapter(private var results: MutableList<HomeEntity.Result?>) :
 
         fun bind(result: HomeEntity.Result?) {
             with(itemView)  {
-                tv_name.text = result?.name ?: "Untitled"
-                tv_slug.text = result?.slug ?: "No Description"
+                tv_nametop.text = result?.nametop ?: " "
+                tv_rating.text = result?.rating ?: " "
+                tv_namelatest.text = result?.namelatest ?: " "
+                tv_released.text = result?.released ?: " "
             }
          }
       }
