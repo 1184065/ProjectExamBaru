@@ -15,5 +15,6 @@ import javax.inject.Singleton
     ApplicationModule::class,
     NetworkModule::class,
     ActivityBuilder::class
-])
+  ]
+)
 interface ApplicationComponent : AndroidInjector<RawGames>

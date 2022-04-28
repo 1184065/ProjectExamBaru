@@ -1,19 +1,27 @@
 package com.example.projectexam.di.module
 
-import com.example.projectexam.data.HomeDatasource
-import com.example.projectexam.data.HomeFactory
+import androidx.lifecycle.ViewModel
+import com.example.projectexam.data.source.HomeDatasource
+import com.example.projectexam.data.factory.HomeFactory
 import com.example.projectexam.di.scope.Presentation
-import com.example.projectexam.domain.HomeRepository
-import com.example.projectexam.domain.HomeRepositoryImpl
-import com.example.projectexam.domain.HomeUsecase
+import com.example.projectexam.di.scope.ViewModelKey
+import com.example.projectexam.domain.repository.TopRatingRepository
+import com.example.projectexam.domain.repository.TopRatingRepositoryImpl
+import com.example.projectexam.domain.usecase.TopRatingUseCase
 import com.example.projectexam.domain.executor.JobExecutor
 import com.example.projectexam.domain.executor.UIThread
-import com.example.projectexam.presentation.HomeActivity
-import com.example.projectexam.presentation.HomePresenter
-import com.example.projectexam.presentation.HomeView
+import com.example.projectexam.domain.repository.LatestGameRepository
+import com.example.projectexam.domain.repository.LatestGameRepositoryImpl
+import com.example.projectexam.domain.usecase.LatestGameUseCase
+import com.example.projectexam.presentation.LatestGameHomeView
+import com.example.projectexam.presentation.activity.HomeActivity
+import com.example.projectexam.presentation.presenter.TopRatingPresenter
+import com.example.projectexam.presentation.TopRatingHomeView
+import com.example.projectexam.presentation.presenter.LatestGamePresenter
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoMap
 import retrofit2.Retrofit
 
 @Module
@@ -21,50 +29,82 @@ abstract class HomeModule {
     @Module
     companion object{
 
-        @JvmStatic
         @Presentation
         @Provides
         fun providesHomeDataSource(retrofit: Retrofit): HomeDatasource =
             retrofit.create(HomeDatasource::class.java)
 
-        @JvmStatic
         @Presentation
         @Provides
         fun providesFactory(datasource: HomeDatasource): HomeFactory =
             HomeFactory(datasource)
 
-        @JvmStatic
+        //TopRatingRepoInstance
         @Presentation
         @Provides
-        fun providesRepository(factory: HomeFactory): HomeRepositoryImpl =
-            HomeRepositoryImpl(factory)
+        fun providesRepository(factory: HomeFactory): TopRatingRepositoryImpl =
+            TopRatingRepositoryImpl(factory)
 
-        @JvmStatic
+        //LatestGameRepoInstance
+        @Presentation
+        @Provides
+        fun providesLatestGameRepository(factory: HomeFactory): LatestGameRepositoryImpl =
+            LatestGameRepositoryImpl(factory)
+
+        //TopRatingUseCase
         @Presentation
         @Provides
         fun providesUsecase(
-            repository: HomeRepository,
+            repository: TopRatingRepository,
             executor: JobExecutor,
             thread: UIThread
-        ): HomeUsecase = HomeUsecase(repository, executor, thread)
+        ): TopRatingUseCase = TopRatingUseCase(repository, executor, thread)
 
-        @JvmStatic
+        //LatestGameUseCase
+        @Presentation
+        @Provides
+        fun providesLatestGameUseCase(
+            repository: LatestGameRepository,
+            executor: JobExecutor,
+            thread: UIThread
+        ): LatestGameUseCase =  LatestGameUseCase(repository, executor, thread)
+
+        //TopRatingPresenter
         @Presentation
         @Provides
         fun providesPresenter(
-            view: HomeView,
-            usecase: HomeUsecase
-        ):HomePresenter = HomePresenter(view, usecase)
+            view: TopRatingHomeView,
+            usecase: TopRatingUseCase
+        ): TopRatingPresenter = TopRatingPresenter(view, usecase)
+
+        //LatestGamePresenter
+        @Presentation
+        @Provides
+        fun providesPresenter(
+            view: LatestGameHomeView,
+            usecase: LatestGameUseCase
+        ): LatestGamePresenter = LatestGamePresenter(view, usecase)
     }
 
     @Binds
-    abstract fun bindRepository(repositoryImpl: HomeRepositoryImpl): HomeRepository
+    abstract fun bindRepository(repositoryImpl: TopRatingRepositoryImpl): TopRatingRepository
 
     @Binds
-    abstract fun bindView(activity: HomeActivity): HomeView
+    abstract fun bindView(activity: HomeActivity): TopRatingHomeView
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(HomeViewModel::class)
-//    abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(LatestGameHomeView::class)
+    abstract fun bindLatestGameHomeView(viewModel: LatestGameHomeView): ViewModel
+
+    @Binds
+    abstract fun bindLatestGameRepository(repositoryImpl: LatestGameRepositoryImpl): LatestGameRepository
+
+    @Binds
+    abstract fun bindLatestGameHomeView(activity: HomeActivity): LatestGameHomeView
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TopRatingHomeView::class)
+    abstract fun bindTopRatingHomeView(viewModel: TopRatingHomeView): ViewModel
 }

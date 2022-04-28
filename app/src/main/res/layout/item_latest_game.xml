@@ -38,7 +38,7 @@
                 tools:text="background" />
 
             <TextView
-                android:id="@+id/tv_nametop"
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/img_background"
@@ -53,10 +53,10 @@
                 tools:text="name" />
 
             <TextView
-                android:id="@+id/tv_rating"
+                android:id="@+id/tv_release"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_nametop"
+                android:layout_below="@id/tv_name"
                 android:layout_margin="8dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"

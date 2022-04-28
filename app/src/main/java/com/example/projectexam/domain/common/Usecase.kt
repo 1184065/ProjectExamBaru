@@ -2,8 +2,6 @@ package com.example.projectexam.domain.common
 
 import com.example.projectexam.domain.executor.PostExecutionThread
 import com.example.projectexam.domain.executor.ThreadExecutor
-import com.example.projectexam.presentation.HomePresenter
-import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo

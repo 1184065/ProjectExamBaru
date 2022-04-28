@@ -14,17 +14,16 @@
         android:theme="@style/Theme.ProjectExam">
 
         <activity
-            android:name=".presentation.SplashActivity"
+            android:name=".presentation.activity.SplashActivity"
             android:exported="true">
+            <activity
+                android:name=".presentation.activity.HomeActivity"
+                android:exported="true" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.HomeActivity"
-            android:exported="true" />
     </application>
 
 </manifest>

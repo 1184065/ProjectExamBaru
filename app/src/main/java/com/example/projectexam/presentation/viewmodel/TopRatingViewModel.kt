@@ -1,23 +1,25 @@
-package com.example.projectexam.presentation
+package com.example.projectexam.presentation.viewmodel
 
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projectexam.BuildConfig
-import com.example.projectexam.data.HomeDatasource
-import com.example.projectexam.domain.HomeEntity
+import com.example.projectexam.data.source.HomeDatasource
+import com.example.projectexam.domain.entity.TopRatingEntity
+import com.example.projectexam.presentation.TopRatingHomeView
+import com.example.projectexam.presentation.state.TopRatingState
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(
+class TopRatingViewModel @Inject constructor(
     private val datasource: HomeDatasource
-) : ViewModel(),HomeView{
+) : ViewModel(), TopRatingHomeView {
 
     private val disposables = CompositeDisposable()
-    private val observer = MutableLiveData<HomeViewState>()
+    private val observer = MutableLiveData<TopRatingState>()
 
-    override val states: LiveData<HomeViewState>
+    override val states: LiveData<TopRatingState>
             get() = observer
 
     override fun onCleared() {
@@ -33,7 +35,7 @@ class HomeViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun onSuccess(entity: HomeEntity) {
+    override fun onSuccess(entity: TopRatingEntity) {
         TODO("Not yet implemented")
     }
 
@@ -41,7 +43,7 @@ class HomeViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun onPaginationSuccess(entity: HomeEntity) {
+    override fun onPaginationSuccess(entity: TopRatingEntity) {
         TODO("Not yet implemented")
     }
 
@@ -51,20 +53,20 @@ class HomeViewModel @Inject constructor(
 
     override fun getApiTopRating() {
         datasource.getApiTopRating(BuildConfig.API_KEY, 1)
-            .map<HomeViewState>(HomeViewState::Success)
-            .onErrorReturn(HomeViewState::Error)
+            .map<TopRatingState>(TopRatingState::Success)
+            .onErrorReturn(TopRatingState::Error)
             .toFlowable()
-            .startWith(HomeViewState.Loading)
+            .startWith(TopRatingState.Loading)
             .subscribe(observer::postValue)
             .let(disposables::add)
         }
 
     override fun getApiLatest() {
         datasource.getApiLatest(BuildConfig.API_KEY)
-            .map<HomeViewState>(HomeViewState::Success)
-            .onErrorReturn(HomeViewState::Error)
+            .map<TopRatingState>(TopRatingState::Success)
+            .onErrorReturn(TopRatingState::Error)
             .toFlowable()
-            .startWith(HomeViewState.Loading)
+            .startWith(TopRatingState.Loading)
             .subscribe(observer::postValue)
             .let(disposables::add)
     }

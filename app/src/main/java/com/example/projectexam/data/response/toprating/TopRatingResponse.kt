@@ -2,7 +2,7 @@ package com.example.projectexam.model
 
 import com.google.gson.annotations.SerializedName
 
-data class HomeResponse(
+data class TopRatingResponse(
     @SerializedName("page")
     val page: Long? = -1L,
     @SerializedName("total_Pages")
@@ -13,15 +13,12 @@ data class HomeResponse(
 )
 
 data class Result(
+    @SerializedName("background_image")
+    val backgroundImage: String? = null,
+
     @SerializedName("name")
-    val nametop: String? = null,
+    val name: String? = null,
 
     @SerializedName("rating")
     val rating: String? = null,
-
-    @SerializedName("name")
-    val namelatest: String? = null,
-
-    @SerializedName("rating")
-    val released: String? = null
 )

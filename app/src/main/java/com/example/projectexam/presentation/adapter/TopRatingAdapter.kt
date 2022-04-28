@@ -1,21 +1,19 @@
 package com.example.projectexam.presentation
 
+import android.annotation.SuppressLint
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 import com.example.projectexam.R
-import com.example.projectexam.domain.HomeEntity
+import com.example.projectexam.domain.entity.TopRatingEntity
+import com.example.projectexam.presentation.state.Type
 import kotlinx.android.synthetic.main.item_home.view.*
 
-enum class Type {
-    DATA,
-    LOADING
-}
-
-class HomeAdapter(private var results: MutableList<HomeEntity.Result?>) :
+class TopRatingAdapter(private var results: MutableList<TopRatingEntity.Result?>) :
     Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -83,19 +81,19 @@ class HomeAdapter(private var results: MutableList<HomeEntity.Result?>) :
         Handler().post {notifyItemRemoved(results.count())}
     }
 
-    fun loadMore(results: MutableList<HomeEntity.Result?>){
+    @SuppressLint("NotifyDataSetChanged")
+    fun loadMore(results: MutableList<TopRatingEntity.Result?>){
         this.results.addAll(results)
         Handler().post {notifyDataSetChanged()}
     }
 
     inner class HomeViewHolder(itemView: View) : ViewHolder(itemView) {
 
-        fun bind(result: HomeEntity.Result?) {
+        fun bind(result: TopRatingEntity.Result?) {
             with(itemView)  {
+                Glide.with(itemView).load(result?.backgroundImage).into(img_background)
                 tv_nametop.text = result?.nametop ?: " "
                 tv_rating.text = result?.rating ?: " "
-                tv_namelatest.text = result?.namelatest ?: " "
-                tv_released.text = result?.released ?: " "
             }
          }
       }
