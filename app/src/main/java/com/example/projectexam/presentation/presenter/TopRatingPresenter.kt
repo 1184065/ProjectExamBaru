@@ -1,9 +1,9 @@
 package com.example.projectexam.presentation.presenter
 
-import com.example.projectexam.domain.entity.TopRatingEntity
 import com.example.projectexam.domain.HomeParam
-import com.example.projectexam.domain.usecase.TopRatingUseCase
 import com.example.projectexam.domain.common.DefaultObserver
+import com.example.projectexam.domain.entity.TopRatingEntity
+import com.example.projectexam.domain.usecase.TopRatingUseCase
 import com.example.projectexam.presentation.TopRatingHomeView
 
 class TopRatingPresenter(
@@ -11,7 +11,7 @@ class TopRatingPresenter(
     private val usecase: TopRatingUseCase
 ) {
 
-    fun getApiTopRating(){
+    fun getApiTopRating() {
         view.onShowLoading()
         usecase.execute(
             GetApiTopRatingUsecase(),
@@ -20,20 +20,20 @@ class TopRatingPresenter(
     }
 
 
-    fun loadMore(page: Long){
+    fun loadMore(page: Long) {
         usecase.execute(
             LoadMoreUsecase(),
             HomeParam(page = page)
         )
     }
 
-    fun onDetach(){
+    fun onDetach() {
         usecase.dispose()
     }
 
     inner class GetApiTopRatingUsecase : DefaultObserver<TopRatingEntity>() {
 
-        override fun onSuccess(entity: TopRatingEntity){
+        override fun onSuccess(entity: TopRatingEntity) {
             view.onHideLoading()
             view.onSuccess(entity)
         }
@@ -44,13 +44,13 @@ class TopRatingPresenter(
         }
     }
 
-    inner class LoadMoreUsecase : DefaultObserver<TopRatingEntity>(){
+    inner class LoadMoreUsecase : DefaultObserver<TopRatingEntity>() {
 
-        override fun onSuccess(entity: TopRatingEntity){
+        override fun onSuccess(entity: TopRatingEntity) {
             view.onPaginationSuccess(entity)
         }
 
-        override fun onError(exception: Throwable){
+        override fun onError(exception: Throwable) {
             view.onPaginationError(exception)
         }
     }

@@ -14,9 +14,9 @@
         <!-- Customize your theme here. -->
     </style>
 
-<!--    //kode style  untuk splash screen-->
-<!--    <style name="Theme.ProjectExam.NoActionBar">-->
-<!--        <item name="windowActionBar">false</item>-->
-<!--        <item name="windowNoTitle">true</item>-->
-<!--    </style>-->
+    <!--    //kode style  untuk splash screen-->
+    <!--    <style name="Theme.ProjectExam.NoActionBar">-->
+    <!--        <item name="windowActionBar">false</item>-->
+    <!--        <item name="windowNoTitle">true</item>-->
+    <!--    </style>-->
 </resources>

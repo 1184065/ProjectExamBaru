@@ -2,8 +2,8 @@ package com.example.projectexam.di.module
 
 import com.example.projectexam.domain.executor.JobExecutor
 import com.example.projectexam.domain.executor.UIThread
-import dagger.Provides
 import dagger.Module
+import dagger.Provides
 import javax.inject.Singleton
 
 @Module

@@ -43,6 +43,7 @@ class TopRatingAdapter(private var results: MutableList<TopRatingEntity.Result?>
             else -> throw RuntimeException("Illegal View Type")
         }
     }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (holder) {
             is HomeViewHolder -> {
@@ -71,31 +72,32 @@ class TopRatingAdapter(private var results: MutableList<TopRatingEntity.Result?>
         }
     }
 
-    fun showLoading(){
+    fun showLoading() {
         results.add(null)
-        Handler().post {notifyItemInserted(results.count().minus(1))}
+        Handler().post { notifyItemInserted(results.count().minus(1)) }
     }
 
-    fun hideLoading(){
+    fun hideLoading() {
         results.removeAt(results.count().minus(1))
-        Handler().post {notifyItemRemoved(results.count())}
+        Handler().post { notifyItemRemoved(results.count()) }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun loadMore(results: MutableList<TopRatingEntity.Result?>){
+    fun loadMore(results: MutableList<TopRatingEntity.Result?>) {
         this.results.addAll(results)
-        Handler().post {notifyDataSetChanged()}
+        Handler().post { notifyDataSetChanged() }
     }
 
     inner class HomeViewHolder(itemView: View) : ViewHolder(itemView) {
 
         fun bind(result: TopRatingEntity.Result?) {
-            with(itemView)  {
+            with(itemView) {
                 Glide.with(itemView).load(result?.backgroundImage).into(img_background)
                 tv_nametop.text = result?.nametop ?: " "
                 tv_rating.text = result?.rating ?: " "
             }
-         }
-      }
-    inner class LoadingViewHolder(itemView: View) : ViewHolder(itemView)
+        }
     }
+
+    inner class LoadingViewHolder(itemView: View) : ViewHolder(itemView)
+}

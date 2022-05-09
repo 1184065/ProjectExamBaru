@@ -5,5 +5,5 @@ import com.example.projectexam.domain.entity.SearchGameEntity
 import io.reactivex.Single
 
 interface SearchGameRepository {
-    fun getApiTopRating(param: HomeParam): Single<SearchGameEntity>
+    fun getApiSearch(param: HomeParam, keyword: String): Single<SearchGameEntity>
 }

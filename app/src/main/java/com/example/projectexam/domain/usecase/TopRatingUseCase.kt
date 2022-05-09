@@ -8,7 +8,7 @@ import com.example.projectexam.domain.executor.UIThread
 import com.example.projectexam.domain.repository.TopRatingRepository
 import io.reactivex.Single
 
-class TopRatingUseCase (
+class TopRatingUseCase(
     private val repository: TopRatingRepository,
     executor: JobExecutor,
     thread: UIThread
@@ -16,4 +16,4 @@ class TopRatingUseCase (
 
     override fun buildUsecaseObservable(params: HomeParam): Single<TopRatingEntity> =
         repository.getApiTopRating(params)
-    }
+}

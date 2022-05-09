@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.example.projectexam.R
 import com.example.projectexam.domain.entity.LatestGameEntity
 import com.example.projectexam.presentation.state.Type
-import kotlinx.android.synthetic.main.item_home.view.*
 import kotlinx.android.synthetic.main.item_latest_game.view.*
 
 class LatestGameAdapter(private var results: MutableList<LatestGameEntity.Result?>) :
@@ -43,6 +42,7 @@ class LatestGameAdapter(private var results: MutableList<LatestGameEntity.Result
             else -> throw RuntimeException("Illegal View Type")
         }
     }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is LatestGameViewHolder -> {
@@ -62,14 +62,14 @@ class LatestGameAdapter(private var results: MutableList<LatestGameEntity.Result
         }
     }
 
-    fun showLoading(){
+    fun showLoading() {
         results.add(null)
-        Handler().post {notifyItemInserted(results.count().minus(1))}
+        Handler().post { notifyItemInserted(results.count().minus(1)) }
     }
 
-    fun hideLoading(){
+    fun hideLoading() {
         results.removeAt(results.count().minus(1))
-        Handler().post {notifyItemRemoved(results.count())}
+        Handler().post { notifyItemRemoved(results.count()) }
     }
 
     @SuppressLint("NotifyDataSetChanged")

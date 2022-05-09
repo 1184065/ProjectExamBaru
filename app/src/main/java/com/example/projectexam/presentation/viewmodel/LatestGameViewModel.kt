@@ -8,11 +8,11 @@ import com.example.projectexam.data.source.HomeDatasource
 import com.example.projectexam.domain.entity.LatestGameEntity
 import com.example.projectexam.presentation.LatestGameHomeView
 import com.example.projectexam.presentation.state.LatestGameState
-import com.example.projectexam.presentation.state.TopRatingState
 import io.reactivex.disposables.CompositeDisposable
 
 
-class LatestGameViewModel(private val datasource: HomeDatasource) : ViewModel(), LatestGameHomeView{
+class LatestGameViewModel(private val datasource: HomeDatasource) : ViewModel(),
+    LatestGameHomeView {
 
     private val disposables = CompositeDisposable()
     private val observer = MutableLiveData<LatestGameState>()

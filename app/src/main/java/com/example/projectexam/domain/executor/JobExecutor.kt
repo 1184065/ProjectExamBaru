@@ -4,7 +4,7 @@ import java.util.concurrent.*
 
 interface ThreadExecutor : Executor
 
-class JobExecutor : ThreadExecutor{
+class JobExecutor : ThreadExecutor {
 
     private val threadPoolExecutor = ThreadPoolExecutor(
         3,
@@ -16,13 +16,13 @@ class JobExecutor : ThreadExecutor{
     )
 
     override fun execute(command: Runnable?) {
-        command?. let { threadPoolExecutor.execute(it) }
+        command?.let { threadPoolExecutor.execute(it) }
     }
 }
 
-class JobThreadFactory(private val counter: Int = 0) : ThreadFactory{
+class JobThreadFactory(private val counter: Int = 0) : ThreadFactory {
 
-    override fun newThread(runnable: Runnable?)=
+    override fun newThread(runnable: Runnable?) =
         Thread(runnable, "android_${counter.inc()}")
-    }
+}
 

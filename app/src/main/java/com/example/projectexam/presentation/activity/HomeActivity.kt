@@ -10,20 +10,26 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.example.projectexam.R
 import com.example.projectexam.domain.entity.LatestGameEntity
+import com.example.projectexam.domain.entity.SearchGameEntity
 import com.example.projectexam.domain.entity.TopRatingEntity
 import com.example.projectexam.presentation.LatestGameHomeView
+import com.example.projectexam.presentation.SearchGameHomeView
 import com.example.projectexam.presentation.TopRatingAdapter
 import com.example.projectexam.presentation.TopRatingHomeView
 import com.example.projectexam.presentation.adapter.LatestGameAdapter
+import com.example.projectexam.presentation.adapter.SearchGameAdapter
 import com.example.projectexam.presentation.presenter.LatestGamePresenter
+import com.example.projectexam.presentation.presenter.SearchGamePresenter
 import com.example.projectexam.presentation.presenter.TopRatingPresenter
 import com.example.projectexam.presentation.state.LatestGameState
+import com.example.projectexam.presentation.state.SearchGameState
 import com.example.projectexam.presentation.state.TopRatingState
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 
-class HomeActivity : DaggerAppCompatActivity(), TopRatingHomeView, LatestGameHomeView {
+class HomeActivity : DaggerAppCompatActivity(), TopRatingHomeView, LatestGameHomeView,
+    SearchGameHomeView {
 
     @Inject
     lateinit var topRatingPresenter: TopRatingPresenter
@@ -45,7 +51,7 @@ class HomeActivity : DaggerAppCompatActivity(), TopRatingHomeView, LatestGameHom
         setContentView(R.layout.activity_home)
         topRatingPresenter.getApiTopRating()
         latestGamePresenter.getApiLatest()
-        searchGamePresenter.getSearch()
+        searchGamePresenter.getApiSearch("BetWin")
     }
 
     override fun onDestroy() {
@@ -62,6 +68,10 @@ class HomeActivity : DaggerAppCompatActivity(), TopRatingHomeView, LatestGameHom
     override fun onHideLoading() {
         pb_home.visibility = View.GONE
         rv_top_rating.visibility = View.VISIBLE
+    }
+
+    override fun onSuccess(entity: SearchGameEntity) {
+        Log.d("SearchGameViewModel", entity.results.toString())
     }
 
     override fun onSuccess(entity: LatestGameEntity) {
@@ -130,6 +140,10 @@ class HomeActivity : DaggerAppCompatActivity(), TopRatingHomeView, LatestGameHom
         Log.e(HomeActivity::class.java.simpleName, "${error.printStackTrace()}")
     }
 
+    override fun onPaginationSuccess(entity: SearchGameEntity) {
+        TODO("Not yet implemented")
+    }
+
     override fun onPaginationSuccess(entity: LatestGameEntity) {
         hideLoading()
         latestGameAdapter?.loadMore(entity.results.toMutableList())
@@ -145,6 +159,13 @@ class HomeActivity : DaggerAppCompatActivity(), TopRatingHomeView, LatestGameHom
         currentPage--
         hideLoading()
     }
+
+    override fun getApiSearch(keyword: String) {
+        TODO("Not yet implemented")
+    }
+
+    override val searchGameState: LiveData<SearchGameState>
+        get() = TODO("Not yet implemented")
 
     override fun getApiTopRating() {
         TODO("Not yet implemented")

@@ -8,7 +8,6 @@ import com.example.projectexam.BuildConfig
 import com.example.projectexam.data.source.HomeDatasource
 import com.example.projectexam.domain.entity.TopRatingEntity
 import com.example.projectexam.presentation.TopRatingHomeView
-import com.example.projectexam.presentation.state.LatestGameState
 import com.example.projectexam.presentation.state.TopRatingState
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -21,7 +20,7 @@ class TopRatingViewModel @Inject constructor(
     private val observer = MutableLiveData<TopRatingState>()
 
     override val states: LiveData<TopRatingState>
-            get() = observer
+        get() = observer
 
     override fun onCleared() {
         super.onCleared()
@@ -60,5 +59,5 @@ class TopRatingViewModel @Inject constructor(
             .startWith(TopRatingState.Loading)
             .subscribe(observer::postValue)
             .let(disposables::add)
-        }
     }
+}

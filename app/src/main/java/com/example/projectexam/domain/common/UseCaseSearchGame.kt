@@ -7,17 +7,21 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
-abstract class Usecase<T, in Params>(
+abstract class UseCaseSearchGame<T, in Params>(
+
     private val threadExecutor: ThreadExecutor,
     private val postExecutionThread: PostExecutionThread
-) {
 
+) {
     private val disposables = CompositeDisposable()
 
-    protected abstract fun buildUsecaseObservable(params: Params): Single<T>
+    protected abstract fun buildUsecaseObservableSearchGame(
+        params: Params,
+        keyword: String
+    ): Single<T>
 
-    fun execute(observer: DefaultObserver<T>, params: Params) {
-        buildUsecaseObservable(params)
+    fun execute(observer: DefaultObserver<T>, params: Params, keyword: String) {
+        buildUsecaseObservableSearchGame(params, keyword)
             .subscribeOn(Schedulers.from(threadExecutor))
             .observeOn(postExecutionThread.scheduler)
             .subscribeWith(observer)

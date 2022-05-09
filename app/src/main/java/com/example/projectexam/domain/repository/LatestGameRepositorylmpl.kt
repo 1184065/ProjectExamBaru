@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 class LatestGameRepositoryImpl(
     private val factory: HomeFactory
-) :  LatestGameRepository {
+) : LatestGameRepository {
 
     override fun getApiLatest(param: HomeParam): Single<LatestGameEntity> =
         factory.getApiLatest().map { response ->

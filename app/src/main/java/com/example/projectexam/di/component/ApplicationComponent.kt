@@ -10,11 +10,12 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-    AndroidSupportInjectionModule::class,
-    ApplicationModule::class,
-    NetworkModule::class,
-    ActivityBuilder::class
-  ]
+@Component(
+    modules = [
+        AndroidSupportInjectionModule::class,
+        ApplicationModule::class,
+        NetworkModule::class,
+        ActivityBuilder::class
+    ]
 )
 interface ApplicationComponent : AndroidInjector<RawGames>

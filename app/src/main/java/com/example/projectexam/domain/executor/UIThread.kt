@@ -7,7 +7,8 @@ interface PostExecutionThread {
 
     val scheduler: Scheduler
 }
+
 class UIThread : PostExecutionThread {
     override val scheduler: Scheduler
-    get() = AndroidSchedulers.mainThread()
+        get() = AndroidSchedulers.mainThread()
 }

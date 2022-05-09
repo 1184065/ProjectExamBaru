@@ -1,24 +1,25 @@
 package com.example.projectexam.di.module
 
 import androidx.lifecycle.ViewModel
-import com.example.projectexam.data.source.HomeDatasource
 import com.example.projectexam.data.factory.HomeFactory
+import com.example.projectexam.data.source.HomeDatasource
 import com.example.projectexam.di.scope.Presentation
 import com.example.projectexam.di.scope.ViewModelKey
-import com.example.projectexam.domain.repository.TopRatingRepository
-import com.example.projectexam.domain.repository.TopRatingRepositoryImpl
-import com.example.projectexam.domain.usecase.TopRatingUseCase
 import com.example.projectexam.domain.executor.JobExecutor
 import com.example.projectexam.domain.executor.UIThread
-import com.example.projectexam.domain.repository.LatestGameRepository
-import com.example.projectexam.domain.repository.LatestGameRepositoryImpl
+import com.example.projectexam.domain.repository.*
 import com.example.projectexam.domain.usecase.LatestGameUseCase
+import com.example.projectexam.domain.usecase.SearchGameUseCase
+import com.example.projectexam.domain.usecase.TopRatingUseCase
 import com.example.projectexam.presentation.LatestGameHomeView
-import com.example.projectexam.presentation.activity.HomeActivity
-import com.example.projectexam.presentation.presenter.TopRatingPresenter
+import com.example.projectexam.presentation.SearchGameHomeView
 import com.example.projectexam.presentation.TopRatingHomeView
+import com.example.projectexam.presentation.activity.HomeActivity
 import com.example.projectexam.presentation.presenter.LatestGamePresenter
+import com.example.projectexam.presentation.presenter.SearchGamePresenter
+import com.example.projectexam.presentation.presenter.TopRatingPresenter
 import com.example.projectexam.presentation.viewmodel.LatestGameViewModel
+import com.example.projectexam.presentation.viewmodel.SearchGameViewModel
 import com.example.projectexam.presentation.viewmodel.TopRatingViewModel
 import dagger.Binds
 import dagger.Module
@@ -28,8 +29,7 @@ import retrofit2.Retrofit
 
 @Module
 abstract class HomeModule {
-    @Module
-    companion object{
+    companion object {
 
         @Presentation
         @Provides
@@ -53,7 +53,7 @@ abstract class HomeModule {
         fun providesLatestGameRepository(factory: HomeFactory): LatestGameRepositoryImpl =
             LatestGameRepositoryImpl(factory)
 
-        //SearchGame
+        //SearchGameInstance
         @Presentation
         @Provides
         fun providesSearchGameRepository(factory: HomeFactory): SearchGameRepositoryImpl =
@@ -75,7 +75,7 @@ abstract class HomeModule {
             repository: LatestGameRepository,
             executor: JobExecutor,
             thread: UIThread
-        ): LatestGameUseCase =  LatestGameUseCase(repository, executor, thread)
+        ): LatestGameUseCase = LatestGameUseCase(repository, executor, thread)
 
         //SearchGameUseCase
         @Presentation
@@ -84,7 +84,7 @@ abstract class HomeModule {
             repository: SearchGameRepository,
             executor: JobExecutor,
             thread: UIThread
-        ): SearchGameUseCase =  SearchGameUseCase(repository, executor, thread)
+        ): SearchGameUseCase = SearchGameUseCase(repository, executor, thread)
 
         //TopRatingPresenter
         @Presentation

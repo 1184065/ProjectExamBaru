@@ -11,26 +11,28 @@ class LatestGamePresenter(
     private val usecase: LatestGameUseCase
 ) {
 
-    fun getApiLatest(){
+    fun getApiLatest() {
         view.onShowLoading()
         usecase.execute(
             GetApiLatestUsecase(),
             HomeParam()
         )
     }
-    fun loadMore(page: Long){
+
+    fun loadMore(page: Long) {
         usecase.execute(
             LoadMoreUsecase(),
             HomeParam(page = page)
         )
     }
-    fun onDetach(){
+
+    fun onDetach() {
         usecase.dispose()
     }
 
     inner class GetApiLatestUsecase : DefaultObserver<LatestGameEntity>() {
 
-        override fun onSuccess(entity:LatestGameEntity){
+        override fun onSuccess(entity: LatestGameEntity) {
             view.onHideLoading()
             view.onSuccess(entity)
         }
@@ -41,13 +43,13 @@ class LatestGamePresenter(
         }
     }
 
-    inner class LoadMoreUsecase : DefaultObserver<LatestGameEntity>(){
+    inner class LoadMoreUsecase : DefaultObserver<LatestGameEntity>() {
 
-        override fun onSuccess(entity: LatestGameEntity){
+        override fun onSuccess(entity: LatestGameEntity) {
             view.onPaginationSuccess(entity)
         }
 
-        override fun onError(exception: Throwable){
+        override fun onError(exception: Throwable) {
             view.onPaginationError(exception)
         }
     }

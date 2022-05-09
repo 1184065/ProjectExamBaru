@@ -8,7 +8,7 @@ import com.example.projectexam.R
 
 class SplashActivity : AppCompatActivity() {
     // Deklarasi variabel timer Splash Screen muncul
-    private val SPLASH_TIME_OUT:Long = 3000 //Delay 3 detik
+    private val SPLASH_TIME_OUT: Long = 3000 //Delay 3 detik
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
