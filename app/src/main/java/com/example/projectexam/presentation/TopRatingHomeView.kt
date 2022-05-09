@@ -2,6 +2,7 @@ package com.example.projectexam.presentation
 
 import androidx.lifecycle.LiveData
 import com.example.projectexam.domain.entity.TopRatingEntity
+import com.example.projectexam.presentation.state.LatestGameState
 import com.example.projectexam.presentation.state.TopRatingState
 
 interface TopRatingHomeView {

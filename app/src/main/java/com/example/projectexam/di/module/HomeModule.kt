@@ -18,6 +18,8 @@ import com.example.projectexam.presentation.activity.HomeActivity
 import com.example.projectexam.presentation.presenter.TopRatingPresenter
 import com.example.projectexam.presentation.TopRatingHomeView
 import com.example.projectexam.presentation.presenter.LatestGamePresenter
+import com.example.projectexam.presentation.viewmodel.LatestGameViewModel
+import com.example.projectexam.presentation.viewmodel.TopRatingViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -51,6 +53,12 @@ abstract class HomeModule {
         fun providesLatestGameRepository(factory: HomeFactory): LatestGameRepositoryImpl =
             LatestGameRepositoryImpl(factory)
 
+        //SearchGame
+        @Presentation
+        @Provides
+        fun providesSearchGameRepository(factory: HomeFactory): SearchGameRepositoryImpl =
+            SearchGameRepositoryImpl(factory)
+
         //TopRatingUseCase
         @Presentation
         @Provides
@@ -69,10 +77,19 @@ abstract class HomeModule {
             thread: UIThread
         ): LatestGameUseCase =  LatestGameUseCase(repository, executor, thread)
 
+        //SearchGameUseCase
+        @Presentation
+        @Provides
+        fun providesSearchGameUseCase(
+            repository: SearchGameRepository,
+            executor: JobExecutor,
+            thread: UIThread
+        ): SearchGameUseCase =  SearchGameUseCase(repository, executor, thread)
+
         //TopRatingPresenter
         @Presentation
         @Provides
-        fun providesPresenter(
+        fun providesTopRatingPresenter(
             view: TopRatingHomeView,
             usecase: TopRatingUseCase
         ): TopRatingPresenter = TopRatingPresenter(view, usecase)
@@ -80,10 +97,18 @@ abstract class HomeModule {
         //LatestGamePresenter
         @Presentation
         @Provides
-        fun providesPresenter(
+        fun providesLatestGamePresenter(
             view: LatestGameHomeView,
             usecase: LatestGameUseCase
         ): LatestGamePresenter = LatestGamePresenter(view, usecase)
+
+        //SearchGamePresenter
+        @Presentation
+        @Provides
+        fun providesSearchGamePresenter(
+            view: SearchGameHomeView,
+            usecase: SearchGameUseCase
+        ): SearchGamePresenter = SearchGamePresenter(view, usecase)
     }
 
     @Binds
@@ -94,8 +119,8 @@ abstract class HomeModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(LatestGameHomeView::class)
-    abstract fun bindLatestGameHomeView(viewModel: LatestGameHomeView): ViewModel
+    @ViewModelKey(TopRatingViewModel::class)
+    abstract fun bindHomeVieModel(ViewModel: TopRatingViewModel): ViewModel
 
     @Binds
     abstract fun bindLatestGameRepository(repositoryImpl: LatestGameRepositoryImpl): LatestGameRepository
@@ -105,6 +130,17 @@ abstract class HomeModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(TopRatingHomeView::class)
-    abstract fun bindTopRatingHomeView(viewModel: TopRatingHomeView): ViewModel
+    @ViewModelKey(LatestGameViewModel::class)
+    abstract fun bindLatestGameViewModel(ViewModel: LatestGameViewModel): ViewModel
+
+    @Binds
+    abstract fun bindSearchGameRepository(repositoryImpl: SearchGameRepositoryImpl): SearchGameRepository
+
+    @Binds
+    abstract fun bindSearchGameHomeView(activity: HomeActivity): SearchGameHomeView
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchGameViewModel::class)
+    abstract fun bindSearchGameViewModel(ViewModel: SearchGameViewModel): ViewModel
 }

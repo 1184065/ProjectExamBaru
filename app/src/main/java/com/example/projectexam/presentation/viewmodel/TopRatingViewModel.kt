@@ -8,6 +8,7 @@ import com.example.projectexam.BuildConfig
 import com.example.projectexam.data.source.HomeDatasource
 import com.example.projectexam.domain.entity.TopRatingEntity
 import com.example.projectexam.presentation.TopRatingHomeView
+import com.example.projectexam.presentation.state.LatestGameState
 import com.example.projectexam.presentation.state.TopRatingState
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -60,15 +61,4 @@ class TopRatingViewModel @Inject constructor(
             .subscribe(observer::postValue)
             .let(disposables::add)
         }
-
-    override fun getApiLatest() {
-        datasource.getApiLatest(BuildConfig.API_KEY)
-            .map<TopRatingState>(TopRatingState::Success)
-            .onErrorReturn(TopRatingState::Error)
-            .toFlowable()
-            .startWith(TopRatingState.Loading)
-            .subscribe(observer::postValue)
-            .let(disposables::add)
-    }
-
     }

@@ -82,7 +82,7 @@ class LatestGameAdapter(private var results: MutableList<LatestGameEntity.Result
 
         fun bind(result: LatestGameEntity.Result?) {
             with(itemView) {
-                Glide.with(itemView).load(result?.backgroundImage).into(img_background)
+                Glide.with(itemView).load(result?.backgroundImage).into(img_latest_game_background)
                 tv_name.text = result?.namelatest ?: " "
                 tv_release.text = result?.released ?: " "
             }

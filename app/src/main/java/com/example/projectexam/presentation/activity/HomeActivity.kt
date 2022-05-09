@@ -31,8 +31,12 @@ class HomeActivity : DaggerAppCompatActivity(), TopRatingHomeView, LatestGameHom
     @Inject
     lateinit var latestGamePresenter: LatestGamePresenter
 
+    @Inject
+    lateinit var searchGamePresenter: SearchGamePresenter
+
     private var topRatingAdapter: TopRatingAdapter? = null
     private var latestGameAdapter: LatestGameAdapter? = null
+    private var searchGameAdapter: SearchGameAdapter? = null
     private var isLoading: Boolean = false
     private var currentPage: Long = -1L
 
@@ -41,12 +45,14 @@ class HomeActivity : DaggerAppCompatActivity(), TopRatingHomeView, LatestGameHom
         setContentView(R.layout.activity_home)
         topRatingPresenter.getApiTopRating()
         latestGamePresenter.getApiLatest()
+        searchGamePresenter.getSearch()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         topRatingPresenter.onDetach()
         latestGamePresenter.onDetach()
+        searchGamePresenter.onDetach()
     }
 
     override fun onShowLoading() {
@@ -150,6 +156,9 @@ class HomeActivity : DaggerAppCompatActivity(), TopRatingHomeView, LatestGameHom
     override fun getApiLatest() {
         TODO("Not yet implemented")
     }
+
+    override val latestGameState: LiveData<LatestGameState>
+        get() = TODO("Not yet implemented")
 
     private fun hideLoading() {
         topRatingAdapter?.hideLoading()

@@ -24,4 +24,11 @@ interface HomeDatasource {
         apiKey: String,
     )
     : Single<LatestGameResponse>
+
+    @GET("games?key=${API_KEY}&page_size=10&platforms=4&search=SIMS&page=1")
+    fun getSearch(
+        @Query("api_key")
+        apiKey: String,
+    )
+    : Single<SearchResponse>
 }

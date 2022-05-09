@@ -13,4 +13,7 @@ class HomeFactory(private val datasource: HomeDatasource) {
 
     fun getApiLatest(): Single<LatestGameResponse> =
         datasource.getApiLatest(apiKey = BuildConfig.API_KEY)
+
+    fun getSearch(): Single<SearchResponse> =
+        datasource.getSearch(apiKey = BuildConfig.API_KEY)
 }

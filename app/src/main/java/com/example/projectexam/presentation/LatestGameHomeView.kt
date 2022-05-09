@@ -17,5 +17,5 @@ interface LatestGameHomeView {
     fun onPaginationSuccess(entity: LatestGameEntity)
     fun onPaginationError(error: Throwable)
     fun getApiLatest()
-    val states: LiveData<TopRatingState>
+    val latestGameState: LiveData<LatestGameState>
 }

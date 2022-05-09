@@ -13,9 +13,9 @@ class TopRatingRepositoryImpl(
         factory.getApiTopRating(param.page).map { response ->
             TopRatingEntity(
                 results = response.results?.map { result ->
-                   Result(
+                   TopRatingEntity.Result(
                        backgroundImage = result.backgroundImage ?: " ",
-                        name = result.name ?: " ",
+                        nametop = result.name ?: " ",
                         rating = result.rating ?: " ",
                     )
                 }?.toMutableList() ?: mutableListOf()
