@@ -7,5 +7,6 @@ data class SearchGameEntity(
     data class Result(
         val backgroundImage: String,
         val name: String,
+        val rating: String,
     )
 }

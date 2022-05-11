@@ -17,6 +17,7 @@ class SearchGameRepositoryImpl(
                     SearchGameEntity.Result(
                         backgroundImage = result.backgroundImage ?: " ",
                         name = result.name ?: " ",
+                        rating = result.rating ?: " ",
                     )
                 }?.toMutableList() ?: mutableListOf()
             )

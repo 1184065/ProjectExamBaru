@@ -10,8 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.projectexam.R
 import com.example.projectexam.domain.entity.SearchGameEntity
 import com.example.projectexam.presentation.state.Type
-import kotlinx.android.synthetic.main.item_home.view.*
-import kotlinx.android.synthetic.main.item_latest_game.view.*
+import kotlinx.android.synthetic.main.item_search_game.view.*
 
 class SearchGameAdapter(private var results: MutableList<SearchGameEntity.Result?>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -23,8 +22,9 @@ class SearchGameAdapter(private var results: MutableList<SearchGameEntity.Result
                     LayoutInflater
                         .from(parent.context)
                         .inflate(
-                            R.layout.activity_home,
+                            R.layout.item_search_game,
                             parent,
+                            false
                         )
                 )
             }
@@ -51,9 +51,7 @@ class SearchGameAdapter(private var results: MutableList<SearchGameEntity.Result
         }
     }
 
-    override fun getItemCount(): Int {
-        return results.count()
-    }
+    override fun getItemCount(): Int = results.count()
 
     override fun getItemViewType(position: Int): Int {
         return when {
@@ -82,12 +80,12 @@ class SearchGameAdapter(private var results: MutableList<SearchGameEntity.Result
 
         fun bind(result: SearchGameEntity.Result?) {
             with(itemView) {
-                Glide.with(itemView).load(result?.backgroundImage).into(img_background)
-                tv_name.text = result?.name ?: " "
+                Glide.with(itemView).load(result?.backgroundImage).into(img_search_game)
+                tv_search_game_name.text = result?.name
+                tv_search_game_rating.text = result?.rating
             }
         }
     }
 
     inner class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
-

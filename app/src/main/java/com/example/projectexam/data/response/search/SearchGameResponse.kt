@@ -14,4 +14,7 @@ data class Search(
 
     @SerializedName("background_image")
     val backgroundImage: String? = null,
+
+    @SerializedName("rating")
+    val rating: String? = null,
 )
